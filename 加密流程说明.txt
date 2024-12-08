@@ -1,0 +1,20 @@
+1 制作加密文字。 文字： testpass
+$Secure = Read-Host -AsSecureString
+$Encrypted = ConvertFrom-SecureString -SecureString $Secure -Key (1..16)
+$Encrypted | Set-Content Encrypted.txt
+
+
+2 加密文字转换安全字符串 
+$Secure2 = Get-Content Encrypted.txt | ConvertTo-SecureString -Key (1..16)
+
+3 安全字符串转明文密码
+$plainTextPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($Secure2))
+
+4 将明文密码出力到文件
+$plainTextPassword | Set-Content plainText.txt
+
+运用：
+读取文件内容
+$FileContent = Get-Content -Path FastLoad.in
+替换内容
+$UpdatedContent = $FileContent -replace "password", $plainTextPassword

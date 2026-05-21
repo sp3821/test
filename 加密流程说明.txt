@@ -18,3 +18,4 @@ $plainTextPassword | Set-Content plainText.txt
 $FileContent = Get-Content -Path FastLoad.in
 替换内容
 $UpdatedContent = $FileContent -replace "password", $plainTextPassword
+InteropServices
